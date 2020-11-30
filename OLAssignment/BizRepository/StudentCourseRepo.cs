@@ -15,7 +15,6 @@ namespace OLAssignment.BizRepository
             ctx = new OLDbContext();
         }
 
- 
         public StudentCourse GetData(int id)
         {
             var res = ctx.StudentCourses.Find(id);

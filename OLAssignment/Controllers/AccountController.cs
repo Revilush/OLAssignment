@@ -11,6 +11,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using OLAssignment.Models;
 
+
 namespace OLAssignment.Controllers
 {
     [Authorize]
@@ -20,6 +21,7 @@ namespace OLAssignment.Controllers
         private ApplicationUserManager _userManager;
 
         ApplicationDbContext AppDbContext;
+        //ApplicationDbContext context;
         OLDbContext olContext;
 
         public AccountController()
@@ -145,11 +147,13 @@ namespace OLAssignment.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-            List<string> roleslist = new List<string>();
-            roleslist.Add("Student");
-            roleslist.Add("Trainer");
+            //List<string> roleslist = new List<string>();
+            //roleslist.Add("Student");
+            //roleslist.Add("Trainer");
             //ViewBag.AvailableRoles = AppDbContext.Roles.ToList().Select(e => e.Name);
-            ViewBag.AvailableRoles = roleslist; 
+            //ViewBag.AvailableRoles = roleslist; 
+
+            ViewBag.RoleName = new SelectList(AppDbContext.Roles.ToList(),"Name", "Name");
             return View();
         }
 
@@ -158,15 +162,17 @@ namespace OLAssignment.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model, string Role)
+        public async Task<ActionResult> Register(RegisterViewModel model)
         {
+            ViewBag.RoleName = new SelectList(AppDbContext.Roles.ToList(), "Name", "Name");
             if (ModelState.IsValid)
             {
+                
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    UserManager.AddToRole(user.Id, Role);
+                    UserManager.AddToRole(user.Id, model.RoleName);
 
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
 
@@ -177,14 +183,15 @@ namespace OLAssignment.Controllers
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
 
-                    if (Role == "Student")
+                    if (model.RoleName == "Student")
                     {
                         return RedirectToAction("GotoStu", "Student", new { uid = user.Id });
                     }
-                    else if (Role == "Trainer")
+                    else if (model.RoleName == "Trainer")
                     {
-                        return RedirectToAction("GotoTr", "Trainer", new { uid = user.Id });
+                        return RedirectToAction("Create", "Trainer", new { uid = user.Id });
                     }
+                    
 
 
 

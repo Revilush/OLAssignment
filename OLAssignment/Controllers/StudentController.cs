@@ -22,7 +22,7 @@ namespace OLAssignment.Controllers
         public ActionResult Index()
         {
             var result = studentRepo.GetData();
-            return View();
+            return View(result);
         }
 
 
@@ -52,7 +52,7 @@ namespace OLAssignment.Controllers
         }
 
         [HttpPost]
-        public ActionResult makeEntry(Student stud)
+        public ActionResult GotoStu(Student stud)
         {
             if (ModelState.IsValid)
             {

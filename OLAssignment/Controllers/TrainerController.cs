@@ -53,7 +53,7 @@ namespace OLAssignment.Controllers
         }
 
         [HttpPost]
-        public ActionResult makeEntry(Trainer train)
+        public ActionResult GotoTr(Trainer train)
         {
             if (ModelState.IsValid)
             {
@@ -64,7 +64,7 @@ namespace OLAssignment.Controllers
 
         }
 
-        public ActionResult Create()
+        public ActionResult Create(string uid)
         {
             //ViewBag.dob = "StudentDOB";
             var result = new Trainer();
