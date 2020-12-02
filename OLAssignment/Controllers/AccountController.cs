@@ -189,7 +189,7 @@ namespace OLAssignment.Controllers
                     }
                     else if (model.RoleName == "Trainer")
                     {
-                        return RedirectToAction("Create", "Trainer", new { uid = user.Id });
+                        return RedirectToAction("GotoTr", "Trainer", new { uid = user.Id });
                     }
                     
 

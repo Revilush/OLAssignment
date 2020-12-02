@@ -11,11 +11,12 @@ namespace OLAssignment.Controllers
     public class CourseController : Controller
     {
         IBizRepository<Course, int> corRepo;
+        IBizRepository<Trainer, int> trnRepo;
         OLDbContext context;
 
-        public CourseController(IBizRepository<Course, int> corRepository)
+        public CourseController()
         {
-            this.corRepo = corRepository;
+            corRepo = new CourseBizRepo();
             context = new OLDbContext();
         }
 
@@ -23,7 +24,7 @@ namespace OLAssignment.Controllers
         public ActionResult Index()
         {
             var result = corRepo.GetData();
-            return View();
+            return View(result);
         }
         public ActionResult GetCourses(string user_id)
         {
@@ -70,6 +71,14 @@ namespace OLAssignment.Controllers
             }
             return View(cor);
         }
+
+        public ActionResult TrainerCourse(string uid)
+        {
+            var result = corRepo.GetData();
+            result = result.Where(e => e.CTrainer.TrainerId == uid).ToList();
+            return View(result);
+        }
+
 
         public ActionResult Create()
         {

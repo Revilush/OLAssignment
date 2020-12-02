@@ -41,10 +41,10 @@ namespace OLAssignment.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        public ActionResult GetEnrolledCourse(string user_id)
+        public ActionResult GetEnrolledCourse(string uid)
         {
             //get Student from user_id
-            Student std = context.Students.Where(e => e.Id == user_id).FirstOrDefault();
+            Student std = context.Students.Where(e => e.Id == uid).FirstOrDefault();
 
             //get courses enrolled by user
             List<StudentCourse> result = context.StudentCourses.Where(e => e.StudentId.StudentRowId == std.StudentRowId).ToList();
