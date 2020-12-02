@@ -30,10 +30,8 @@ namespace OLAssignment.Controllers
         {
             //get Area of interests for dropdown
             //ViewBag.AOI = context.AreaOfInterests.ToList();
-
             var result = new Trainer();
             result.Id = uid;
-
 
             //generate Trainer Id
             if (context.Trainers.Count() > 0)
@@ -58,7 +56,7 @@ namespace OLAssignment.Controllers
             if (ModelState.IsValid)
             {
                 trainRepo.Create(train);
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index");
             }
             return View(train);
 
