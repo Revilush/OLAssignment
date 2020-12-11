@@ -157,6 +157,8 @@ namespace OLAssignment.Controllers
             return View();
         }
 
+
+
         //
         // POST: /Account/Register
         [HttpPost]
@@ -180,7 +182,9 @@ namespace OLAssignment.Controllers
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>"
+
+
 
 
                     if (model.RoleName == "Student")
@@ -191,10 +195,7 @@ namespace OLAssignment.Controllers
                     {
                         return RedirectToAction("GotoTr", "Trainer", new { uid = user.Id });
                     }
-                    
-
-
-
+  
                     return RedirectToAction("Index", "Home");
                 }
                 AddErrors(result);

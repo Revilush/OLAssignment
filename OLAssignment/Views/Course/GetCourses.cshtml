@@ -6,9 +6,10 @@
 
 <h2>GetCourses</h2>
 
-<p>
+@*<p>
     @Html.ActionLink("Create New", "Create")
-</p>
+</p>*@
+
 <table class="table">
     <tr>
         <th>
@@ -16,6 +17,9 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CTrainer.TrainerName)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.NoFMod)
@@ -29,9 +33,7 @@
         <th>
             @Html.DisplayNameFor(model => model.Rating)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CTrainer.TrainerName)
-        </th>
+
 
         <th></th>
     </tr>
@@ -45,6 +47,9 @@
         @Html.DisplayFor(modelItem => item.Description)
     </td>
     <td>
+        @Html.DisplayFor(modelItem => item.CTrainer.TrainerName)
+    </td>
+    <td>
         @Html.DisplayFor(modelItem => item.NoFMod)
     </td>
     <td>
@@ -56,13 +61,11 @@
     <td>
         @Html.DisplayFor(modelItem => item.Rating)
     </td>
+
     <td>
-        @Html.DisplayFor(modelItem => item.CTrainer.TrainerName)
-    </td>
-    <td>
-        @Html.ActionLink("Edit", "Edit", new { id=item.CourseRowId  }) |
-        @*@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |*@
-        @Html.ActionLink("Delete", "Delete", new { id=item.CourseRowId  })
+        @Html.ActionLink("Details", "Details", new { id = item.CourseRowId }) |
+        @*@Html.ActionLink("Edit", "Edit", new { id = item.CourseRowId }) |
+        @Html.ActionLink("Delete", "Delete", new { id = item.CourseRowId })*@
     </td>
 </tr>
 }

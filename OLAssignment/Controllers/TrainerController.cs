@@ -56,7 +56,8 @@ namespace OLAssignment.Controllers
             if (ModelState.IsValid)
             {
                 trainRepo.Create(train);
-                return RedirectToAction("Index");
+                TempData["Trainer"] = train;
+                return RedirectToAction("Index","Home");
             }
             return View(train);
 

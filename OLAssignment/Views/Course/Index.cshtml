@@ -6,9 +6,16 @@
 
 <h2>Index</h2>
 
-<p>
-    //@Html.ActionLink("Create New", "Create")
-</p>
+@*<p>
+        //@Html.ActionLink("Create New", "Create")
+    </p>*@
+
+<form action="/Course/SCourses">
+    <input type="text" name="query">
+    <input type="submit">
+</form>
+
+
 <table class="table">
     <tr>
         <th>
@@ -35,35 +42,37 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.CourseRowId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CourseName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NoFMod)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CStatus)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Price)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Rating)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new {  id=item.CourseRowId }) |
-            @*@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |*@
-            @Html.ActionLink("Delete", "Delete", new { id=item.CourseRowId })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CourseRowId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CourseName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NoFMod)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CStatus)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Rating)
+            </td>
+            <td>
+                @Html.ActionLink("Details", "Details", new { id = item.CourseRowId })
+                @Html.ActionLink(linkText: "Enroll",actionName: "CourseEnroll", controllerName: "StudentCourse",routeValues: new { course_id = item.CourseRowId, student_id = ViewBag.loggedInUser },htmlAttributes: new { @class = "btn btn-primary btn-block" })
+                @*@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+        @Html.ActionLink("Delete", "Delete", new { id = item.CourseRowId })*@
+            </td>
+        </tr>
+    }
 
 </table>

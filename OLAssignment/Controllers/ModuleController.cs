@@ -25,29 +25,44 @@ namespace OLAssignment.Controllers
         public ActionResult Index()
         {
             var result = modRepo.GetData();
-
-            //Read data from TEMPDATA passed from category action "Show Modules for Course":
+            //Read data from TEMPDATA passed from courses action "Show Modules for Course":
             if (TempData["CourseRowId"] != null)
             {
-                int catid = Convert.ToInt32(TempData["CategoryRowId"]);
-
-                result = (from prd in modRepo.GetData() where Convert.ToInt32(prd.CourseRowId) == catid select prd).ToList();
+                int corid = Convert.ToInt32(TempData["CourseRowId"]);
+                result = (from mod in modRepo.GetData() where Convert.ToInt32(mod.CourseRowId) == corid select mod).ToList();
                 //TempData.Keep();
-
-                ViewBag.Message = $"Category of row id:{catid} Contains {result.Count} products ";
-
+                ViewBag.Message = $"Course of row id:{corid} Contains {result.Count} modules ";
                 if (result.Count == 0)
                 {
-                    ViewBag.Message = $"This Category of row id:{catid} has no products ";
+                    ViewBag.Message = $"This Course of row id:{corid} has no modules ";
                 }
             }
             else
             {
                 result = modRepo.GetData();
-                ViewBag.Message = "List of all products ";
+                ViewBag.Message = "List of all modules ";
             }
-
             return View(result);
         }
+
+        public ActionResult Create()
+        {
+            var result = new Module();
+            return View(result);
+        }
+
+        [HttpPost]
+        public ActionResult Create(Module mod)
+        {
+            if (ModelState.IsValid)
+            {
+                modRepo.Create(mod);
+                return RedirectToAction("Index");
+            }
+            return View(mod);
+        }
+
+
+
     }
 }

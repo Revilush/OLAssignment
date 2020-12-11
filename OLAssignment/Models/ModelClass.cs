@@ -33,7 +33,8 @@ namespace OLAssignment.Models
         public int Rating { get; set; }
 
         // one to many relationship:
-        //public int TrainerRowId { get; set; }
+        //public virtual int TrainerRowId { get; set; }
+
         public virtual Trainer CTrainer  { get; set; }
 
         public virtual ICollection<Module> Modules { get; set; }

@@ -1,7 +1,52 @@
-﻿
+﻿@model IEnumerable<OLAssignment.Models.Module>
+
 @{
     ViewBag.Title = "Index";
 }
 
 <h2>Index</h2>
 
+@if (User.IsInRole("Trainer"))
+{
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+}
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.MId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MContent)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MContent)
+                </td>
+                @if(User.IsInRole("Trainer"))
+                {
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.ModuleId }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.ModuleId }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.ModuleId })
+                    </td>
+                }
+            </tr>
+        }
+
+    </table>

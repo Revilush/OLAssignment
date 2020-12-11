@@ -26,36 +26,45 @@ namespace OLAssignment.Controllers
             var result = corRepo.GetData();
             return View(result);
         }
-        public ActionResult GetCourses(string user_id)
+
+        public ActionResult SCourses(string query)
         {
             var result = corRepo.GetData();
-            result = result.Where(e => e.CTrainer.Id == user_id).ToList();
+            result = result.Where(e => e.CourseName == query).ToList();
             return View(result);
         }
 
-        public ActionResult ShowModulesForCOurses(int id)
+        public ActionResult GetCourses(string uid)
+        {
+            var result = corRepo.GetData();
+            result = result.Where(e => e.CTrainer.Id == uid).ToList();
+            return View(result);
+        }
+
+        public ActionResult Details(int id)
         {
             TempData["CourseRowId"] = id;
             return RedirectToAction("Index", "Module");
         }
 
-        public ActionResult AddCourse(string user_id)
+        public ActionResult AddCourse(string uid)
         {
-            var t_trainer = context.Trainers.Where(e => e.Id == user_id).FirstOrDefault();
+            var tmp = context.Trainers.Where(e => e.Id == uid).FirstOrDefault();
             var result = new Course();
-            result.CTrainer = t_trainer;
-            //generate Course Id
+            result.CTrainer = tmp;
+            //result.CTrainer = context.Trainers.Where(e => e.Id == uid).FirstOrDefault();
+            //result.CTrainer = (Trainer)TempData["Trainer"];
             if (context.Courses.Count() > 0)
             {
-                string c_id = context.Courses.OrderByDescending(e => e.CourseId).First().CourseId;
-                string[] temp = c_id.Split(':');
-                temp[1] = (Convert.ToInt32(temp[1]) + 1).ToString("000");
-                c_id = temp[0] + ':' + temp[1];
-                result.CourseId = c_id;
+                string cid = context.Courses.OrderByDescending(e => e.CourseId).First().CourseId;
+                string[] temp = cid.Split(':');
+                temp[1] = (Convert.ToInt32(temp[1]) + 1).ToString("00");
+                cid = temp[0] + ':' + temp[1];
+                result.CourseId = cid;
             }
             else
             {
-                result.CourseId = "C:001";
+                result.CourseId = "C:1";
             }
 
             return View(result);
@@ -70,13 +79,6 @@ namespace OLAssignment.Controllers
                 return RedirectToAction("Index", "Home");
             }
             return View(cor);
-        }
-
-        public ActionResult TrainerCourse(string uid)
-        {
-            var result = corRepo.GetData();
-            result = result.Where(e => e.CTrainer.TrainerId == uid).ToList();
-            return View(result);
         }
 
 

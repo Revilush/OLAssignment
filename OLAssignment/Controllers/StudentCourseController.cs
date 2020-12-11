@@ -26,15 +26,12 @@ namespace OLAssignment.Controllers
         }
 
         [Authorize(Roles = "Student")]
-        public ActionResult EnrollCourse(int course_id, int student_id)
+        public ActionResult CourseEnroll(int corid, int stuid)
         {
-            //prepare object for making an entry in database
             StudentCourse cs = new StudentCourse();
-            cs.CourseId = context.Courses.Where(e => e.CourseRowId == course_id).FirstOrDefault();
-            cs.StudentId = context.Students.Where(e => e.StudentRowId == student_id).FirstOrDefault();
+            cs.CourseId = context.Courses.Where(e => e.CourseRowId == corid).FirstOrDefault();
+            cs.StudentId = context.Students.Where(e => e.StudentRowId == stuid).FirstOrDefault();
             cs.Status = 0;
-            //create row in database
-            //studentCourseRepo.create(cs);
             context.StudentCourses.Add(cs);
             context.SaveChanges();
 
@@ -43,10 +40,8 @@ namespace OLAssignment.Controllers
 
         public ActionResult GetEnrolledCourse(string uid)
         {
-            //get Student from user_id
             Student std = context.Students.Where(e => e.Id == uid).FirstOrDefault();
 
-            //get courses enrolled by user
             List<StudentCourse> result = context.StudentCourses.Where(e => e.StudentId.StudentRowId == std.StudentRowId).ToList();
             return View(result);
         }
