@@ -270,7 +270,7 @@
     <Content Include="Views\Course\Delete.cshtml" />
     <Content Include="Views\Course\Edit.cshtml" />
     <Content Include="Views\Course\Index.cshtml" />
-    <Content Include="Views\Course\AddCourse.cshtml" />
+    <Content Include="Views\Course\AddCourseOld.cshtml" />
     <Content Include="Views\Student\Create.cshtml" />
     <Content Include="Views\Student\Delete.cshtml" />
     <Content Include="Views\Student\Edit.cshtml" />
@@ -289,6 +289,7 @@
     <Content Include="Views\Course\TrainerCourse.cshtml" />
     <Content Include="Views\Module\Index.cshtml" />
     <Content Include="Views\Module\Create.cshtml" />
+    <Content Include="Views\Course\AddCourse.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

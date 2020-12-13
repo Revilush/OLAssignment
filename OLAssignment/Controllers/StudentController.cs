@@ -57,7 +57,7 @@ namespace OLAssignment.Controllers
             if (ModelState.IsValid)
             {
                 studentRepo.Create(stud);
-                ViewBag
+                //ViewBag
                 return RedirectToAction("Index", "Home");
             }
             return View(stud);

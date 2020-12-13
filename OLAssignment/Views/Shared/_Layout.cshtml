@@ -24,23 +24,25 @@
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
 
+
                     @if (User.IsInRole("Student"))
                     {
                         //<li>@Html.ActionLink("Role", "Index", "Role")</li>
+                        //<li>@Html.ActionLink("Courses", "Index", "Course")</li>
                         <li>@Html.ActionLink("Courses", "Index", "Course")</li>
-                        <li>@Html.ActionLink("My Course", "GetEnrolledCourse", "StudentCourse", routeValues: new { uid = User.Identity.GetUserId() }, htmlAttributes: new { id = "link" })</li>
+                        <li>@Html.ActionLink("My Course", "GetEnrolledCourse", "StudentCourse", routeValues: new { uid = User.Identity.GetUserId() }, htmlAttributes: new { })</li>
                     }
 
                     @if (User.IsInRole("Trainer"))
                     {
                         //<li>@Html.ActionLink("Role", "Index", "Role")</li>
                         //<li>@Html.ActionLink("Trainer", "Index", "Trainer")</li>
-                        <li>@Html.ActionLink("My Class", "GetCourses", "Course", routeValues: new { uid = User.Identity.GetUserId() }, htmlAttributes: new { id = "link" })</li>
-                        <li>@Html.ActionLink("Add new Course", "AddCourse", "Course", routeValues: new { uid = User.Identity.GetUserId() }, htmlAttributes: new { id = "link" })</li>
+                        <li>@Html.ActionLink("My Class", "GetCourses", "Course", routeValues: new { uid = User.Identity.GetUserId() }, htmlAttributes: new { })</li>
+                        <li>@Html.ActionLink(linkText: "Add new Course", actionName: "AddCourse", controllerName: "Course", routeValues: new { uid = User.Identity.GetUserId() }, htmlAttributes: new { }  )</li>
                     }
 
                     @*<li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>*@
+        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>*@
                 </ul>
 
                 @Html.Partial("_LoginPartial")

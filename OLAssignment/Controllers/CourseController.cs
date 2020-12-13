@@ -5,6 +5,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin.Security;
 
 namespace OLAssignment.Controllers
 {
@@ -12,18 +15,24 @@ namespace OLAssignment.Controllers
     {
         IBizRepository<Course, int> corRepo;
         IBizRepository<Trainer, int> trnRepo;
+        IBizRepository<Student, int> sturepo;
         OLDbContext context;
 
         public CourseController()
         {
+            sturepo = new StudentBizRepo();
             corRepo = new CourseBizRepo();
             context = new OLDbContext();
         }
 
         // GET: Course  
+        
         public ActionResult Index()
         {
             var result = corRepo.GetData();
+            var studentidtmp = sturepo.GetData();
+            var studidtmp = studentidtmp.Where(s => s.Id == User.Identity.GetUserId()).FirstOrDefault().Id.ToString();
+            ViewBag.Studid = studidtmp;
             return View(result);
         }
 
@@ -44,6 +53,7 @@ namespace OLAssignment.Controllers
         public ActionResult Details(int id)
         {
             TempData["CourseRowId"] = id;
+            
             return RedirectToAction("Index", "Module");
         }
 

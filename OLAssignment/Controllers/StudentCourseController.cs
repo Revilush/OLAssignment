@@ -26,11 +26,11 @@ namespace OLAssignment.Controllers
         }
 
         [Authorize(Roles = "Student")]
-        public ActionResult CourseEnroll(int corid, int stuid)
+        public ActionResult CourseEnroll(int corid,string stuid)
         {
             StudentCourse cs = new StudentCourse();
             cs.CourseId = context.Courses.Where(e => e.CourseRowId == corid).FirstOrDefault();
-            cs.StudentId = context.Students.Where(e => e.StudentRowId == stuid).FirstOrDefault();
+            cs.StudentId = context.Students.Where(e => e.Id == stuid).FirstOrDefault();
             cs.Status = 0;
             context.StudentCourses.Add(cs);
             context.SaveChanges();

@@ -21,6 +21,10 @@
         <th>
             @Html.DisplayNameFor(model => model.CourseRowId)
         </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.CourseId)
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.CourseName)
         </th>
@@ -49,6 +53,9 @@
                 @Html.DisplayFor(modelItem => item.CourseRowId)
             </td>
             <td>
+                @Html.DisplayFor(modelItem => item.CourseId)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.CourseName)
             </td>
             <td>
@@ -68,7 +75,7 @@
             </td>
             <td>
                 @Html.ActionLink("Details", "Details", new { id = item.CourseRowId })
-                @Html.ActionLink(linkText: "Enroll",actionName: "CourseEnroll", controllerName: "StudentCourse",routeValues: new { course_id = item.CourseRowId, student_id = ViewBag.loggedInUser },htmlAttributes: new { @class = "btn btn-primary btn-block" })
+                @Html.ActionLink("Enroll", "CourseEnroll","StudentCourse", new { corid = item.CourseRowId , stuid = ViewBag.Studid}, new { @class = "btn btn-light btn-block" })
                 @*@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
         @Html.ActionLink("Delete", "Delete", new { id = item.CourseRowId })*@
             </td>
